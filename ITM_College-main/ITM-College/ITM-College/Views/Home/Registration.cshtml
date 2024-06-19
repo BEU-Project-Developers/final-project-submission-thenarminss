@@ -1,0 +1,115 @@
+﻿@model ITM_College.Models.Student
+
+<!-- start page title section -->
+<section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="/clientcss/img/bg/page-title.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Register</h1>
+            </div>
+            <div class="col-md-12">
+                <ul>
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                    <li><a href="javascript:void(0)">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title section -->
+<!-- start register section -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 ml-auto mr-auto">
+                <div class="common-block padding-40px-all sm-padding-30px-all xs-padding-25px-all">
+                    <h4 class="text-center no-margin-bottom font-weight-500">Register New Account</h4>
+                    <div class="title-border"><span class="lg"></span><span class="md"></span><span class="sm"></span></div>
+                    <form class="margin-30px-top" method="post" enctype="multipart/form-data" id="register-form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="StudentName">Full Name</label>
+                                    <input class="form-control margin-5px-bottom" type="text" id="StudentName" placeholder="Full Name" asp-for="StudentName">
+                                    <span asp-validation-for="StudentName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="StudentEmail">Email</label>
+                                    <input class="form-control margin-5px-bottom" type="email" id="StudentEmail" placeholder="E-Mail" asp-for="StudentEmail">
+                                    <span asp-validation-for="StudentEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="Password">Password</label>
+                                    <input class="form-control margin-5px-bottom" type="password" id="Password" placeholder="Password" asp-for="Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="img">Profile Picture</label>
+                                    <input class="form-control margin-5px-bottom" type="file" id="img" name="img">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="Role" asp-for="Role" value="1">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group no-margin">
+                                    <a asp-action="Login" asp-controller="Account">Already a User? Login!</a>
+                                </div>
+                                <button type="submit" class="butn theme margin-20px-top"><span class="alt-font">Register <i class="fas fa-long-arrow-alt-right margin-10px-left"></i></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end register section -->
+
+<script>
+    const validate = new window.JustValidate('#register-form');
+
+    validate
+        .addField('#StudentName', [
+            {
+                rule: 'required',
+                errorMessage: 'Name is required',
+            },
+            {
+                rule: 'minLength',
+                value: 3,
+                errorMessage: 'Name must be at least 3 characters',
+            },
+            {
+                rule: 'maxLength',
+                value: 30,
+                errorMessage: 'Name must not exceed 30 characters',
+            },
+        ])
+        .addField('#StudentEmail', [
+            {
+                rule: 'required',
+                errorMessage: 'Email is required',
+            },
+            {
+                rule: 'email',
+                errorMessage: 'Email is invalid!',
+            },
+        ])
+        .onSuccess((event) => {
+            event.target.submit();
+        });
+</script>
